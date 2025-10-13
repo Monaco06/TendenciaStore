@@ -1,0 +1,161 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+html, body{
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--bg);
+    color: #222;
+}
+
+p{
+    white-space: pre-line;
+}
+
+#logo{
+    width: 48px; /* tamaño base */
+    height: auto;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 12px;
+}
+
+.site-header{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 12px;
+}
+.site-header .site-title{ display: block; }
+.site-header h1{ font-size: 20px; margin: 0; }
+.site-header .tagline{ margin: 0; font-size: 13px; color: var(--muted); }
+
+/* Header */
+.site-header{
+    padding: 28px 16px;
+    text-align: center;
+    background: linear-gradient(90deg, #f8f9fa, #ffffff);
+    border-bottom: 1px solid var(--border);
+}
+.site-header h1{ font-size: 28px; margin-bottom: 6px; }
+.site-header .tagline{ color: var(--muted); }
+
+.section-header{ text-align:center; padding: 24px 12px 8px; }
+.section-header h2{ font-size: 22px; margin-bottom: 6px; }
+.section-header p{ color: var(--muted); }
+
+
+/* Estilos para el contenedor detallado */
+
+.detallado{
+    /* tamaño: más ancho para mostrar imagen + texto */
+    max-width: 900px;
+    width: min(95vw, 900px);
+
+    /* centrado horizontal y separación */
+    margin: 36px auto;
+
+    /* apariencia */
+    background: #f7f3ff;
+    border: 1px solid #e1d7ff;
+    box-shadow: 0 8px 20px rgba(30,30,60,0.06);
+    padding: 18px;
+    box-sizing: border-box;
+    border-radius: 10px;
+
+    /* layout: imagen izquierda, texto derecha */
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 16px;
+    align-items: center;
+}
+
+.detallado img.producto-imagen{
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+    max-height: 420px; /* evita que la imagen crezca demasiado */
+}
+
+.detallado .detalle-contenido{ display: flex; flex-direction: column; gap: 10px; }
+.detallado h2{ font-size: 22px; margin: 0; }
+.detallado p{ color: #444; font-size: 15px; line-height: 1.4; }
+
+/* En pantallas pequeñas mostramos en columna única (imagen arriba) */
+@media (max-width: 680px){
+    .detallado{
+        grid-template-columns: 1fr;
+        padding: 14px;
+    }
+    .detallado img.producto-imagen{ max-height: 280px; }
+}
+
+/* Botón de WhatsApp */
+.acciones{ margin-top: 8px; }
+.btn-whatsapp{
+    display: inline-block;
+    background: #25D366; /* color oficial de WhatsApp */
+    color: white;
+    padding: 10px 14px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 700;
+    box-shadow: 0 6px 14px rgba(37,211,102,0.18);
+}
+.btn-whatsapp:hover{ transform: translateY(-2px); }
+
+/* Botón secundario (volver al menú) */
+.btn-secondary{
+    display: inline-block;
+    background: transparent;
+    color: #2b2b2b;
+    padding: 10px 14px;
+    margin-left: 10px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 700;
+    border: 1px solid rgba(0,0,0,0.08);
+}
+.btn-secondary:hover{ background: rgba(0,0,0,0.04); transform: translateY(-2px); }
+
+/* Alineación de botones */
+.acciones{ display: flex; gap: 8px; align-items: center; }
+
+/* Contenedor para el botón "Volver al menú" fuera del detallado */
+.volver-centro{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 18px 0 40px 0;
+}
+.volver-centro .btn-secondary{ margin-left: 0; }
+
+/* En móviles, hacemos el botón más visible y fijo al fondo */
+@media (max-width: 680px){
+    .volver-centro{
+        position: fixed;
+        left: 50%;
+        transform: translateX(-50%);
+        /* usar safe-area para no quedar bajo la barra de sistema */
+        bottom: calc(env(safe-area-inset-bottom, 14px) + 12px);
+        margin: 0;
+        z-index: 9999; /* aseguramos que quede encima de elementos */
+    }
+    .volver-centro .btn-secondary{
+        background: #ffffff;
+        color: #222;
+        padding: 12px 18px;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+        border-radius: 999px;
+        border: 1px solid rgba(0,0,0,0.08);
+    }
+    /* Evitar que el botón fijo tape otros elementos (ej. botón de WhatsApp) */
+    /* Ajustar padding-bottom usando safe-area también */
+    body{ padding-bottom: calc(env(safe-area-inset-bottom, 14px) + 110px); }
+    /* Añadimos un pequeño espacio extra dentro del detalle para despejar botones */
+    .detallado{ padding-bottom: 18px; }
+}
+
+
